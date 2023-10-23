@@ -1,0 +1,55 @@
+#startBtn {
+  display: inline-block;
+}
+.gameSetting {
+  margin-bottom: 10px;
+}
+
+.flag{
+  background-image: url(./flag.png);
+  background-size: cover;
+}
+
+.mineImg {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+td {
+  width: 40px;
+  height: 40px;
+  font-size: 0;
+}
+td.empty {
+  cursor: pointer;
+  color: #1eb1f5;
+  /* font-size: 0; */
+  cursor: pointer;
+}
+td.mine {
+  cursor: pointer;
+  color: rgb(255, 136, 0);
+  /* color: #f0f0f0; */
+  /* font-size: 0; */
+  cursor: pointer;
+  /* background-image: url("./mineRed.png"); */
+  background-size: cover;
+}
+.clear{
+  background-color: rgba(1, 15, 20, 0.459);
+}
+.mineExplo {
+   background-image: url("./mineExplo.png");
+   background-size: cover;
+}
+.cellNum{
+  background-color: rgba(1, 15, 20, 0.459);
+  color: #e4eaec;
+  text-align: center;
+  font-size: 1rem;
+}
+#area {
+  display: inline-block;
+  background-color: #f0f0f036;
+}

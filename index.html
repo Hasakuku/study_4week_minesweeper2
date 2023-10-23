@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>minesweeper</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <nav class="gameSetting">
+      <input type="number" id="rows" placeholder="가로">
+      <input type="number" id="cols" placeholder="세로">
+      <input type="number" id="mines" placeholder="지뢰">
+      <button id="startBtn">게임 시작</button>
+      <button id="resetBtn">다시 하기</button>
+   </nav>
+   <hr />
+   <div class="mineImgNum">
+      <img class="mineImg" src="./mineimg.png">
+      <span class="mineRest">0</span>
+   </div>
+   <div id="area"></div>
+</body>
+<script src="index.js"></script>
+
+</html>
