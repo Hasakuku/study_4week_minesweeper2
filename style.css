@@ -19,7 +19,7 @@
 td {
   width: 40px;
   height: 40px;
-  font-size: 0;
+  /* font-size: 0; */
 }
 td.empty {
   cursor: pointer;

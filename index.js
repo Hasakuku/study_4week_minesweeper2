@@ -50,7 +50,7 @@ function placeMines(numMines, numRows, numCols) {
 }
 
 // 셀 좌클릭 이벤트
-function cellLeftEvent(numRows, numCols) {
+/*function cellLeftEvent(numRows, numCols) {
   let emptyCells = document.querySelectorAll('.empty'); // 지뢰가 없는 셀 접근
   emptyCells.forEach(cell => { // 셀 순회
     cell.addEventListener('click', function () {
@@ -61,7 +61,7 @@ function cellLeftEvent(numRows, numCols) {
           let xAdj = document.querySelector(`tr:nth-child(${i + 1})`) // 인접 셀 x좌표 접근
           let yAdj = xAdj.querySelector(`td:nth-child(${j + 1})`) // 인접 셀 x좌표의 y좌표 접근
           if (yAdj.classList.contains('mine')) { // mine 클래스 존재시 카운트 증가
-            count++;
+            count++; // 클릭 셀 숫자 증가
           }
         }
       }
@@ -69,14 +69,66 @@ function cellLeftEvent(numRows, numCols) {
       if (this.textContent !== '') { // 숫자가 있다면?
         this.classList.remove('empty')
         this.classList.add('cellNum') // 숫자 색상 추가
+      } else { // (숫자0) 인접셀이 모두 지뢰가 없다면?
+        this.classList.remove('empty')
+        this.classList.add('clear') // 클릭 셀에 clear추가
+        // 셀의 숫자가 0일때, 인접셀 오픈
+        for (let i = Math.max(row - 1, 0); i <= Math.min(row + 1, numRows - 1); i++) {
+          for (let j = Math.max(col - 1, 0); j <= Math.min(col + 1, numCols - 1); j++) {
+            let xAdj = document.querySelector(`tr:nth-child(${i + 1})`)
+            let yAdj = xAdj.querySelector(`td:nth-child(${j + 1})`)
+            if (yAdj.classList.contains('empty')) {
+              yAdj.click(); // 재귀적으로 클릭 이벤트 발생시킴
+            }
+          }
+        }
+      }
+    });
+  });
+}*/
+//셀 좌클릭 이벤트2
+function cellLeftEvent(numRows, numCols) {
+  let emptyCells = document.querySelectorAll('.empty'); // 지뢰가 없는 셀 접근
+
+  function checkAdjacentCells(row, col, callback) {
+    for (let i = Math.max(row - 1, 0); i <= Math.min(row + 1, numRows - 1); i++) {
+      for (let j = Math.max(col - 1, 0); j <= Math.min(col + 1, numCols - 1); j++) {
+        let rowElement = document.querySelector(`tr:nth-child(${i + 1})`)
+        let cellElement = rowElement.querySelector(`td:nth-child(${j + 1})`)
+        callback(cellElement);
+      }
+    }
+  }
+
+  emptyCells.forEach(cell => { // 셀 순회
+    cell.addEventListener('click', function () {
+      let [row, col] = this.textContent.split('.').map(Number); // cell의 좌표 숫자로 변환
+      let mineCount = 0; // 주변 지뢰 수 초기값
+
+      checkAdjacentCells(row, col, (adjacentCell) => {
+        if (adjacentCell.classList.contains('mine')) { // mine 클래스 존재시 카운트 증가
+          mineCount++; // 클릭 셀 숫자 증가
+        }
+      });
+
+      this.textContent = mineCount >= 1 ? mineCount : '';
+      if (this.textContent !== '') { // 숫자가 있다면?
+        this.classList.remove('empty')
+        this.classList.add('cellNum') // 숫자 색상 추가
       } else {
         this.classList.remove('empty')
-        this.classList.add('clear')
-      }
+        this.classList.add('clear') // 지뢰 없는것 확인
 
+        checkAdjacentCells(row, col, (adjacentCell) => {
+          if (adjacentCell.classList.contains('empty')) {
+            adjacentCell.click(); // 재귀적으로 클릭 이벤트 발생시킴
+          }
+        });
+      }
     });
   });
 }
+
 // 셀 우클릭 이벤트
 function cellRightEvent() {
   let cells = document.querySelectorAll('#area td'); // 모든 셀 접근
@@ -110,10 +162,10 @@ function gameFinish() {
   // 지뢰를 클릭하면 게임 종료
   mineCells.forEach(cell => {
     cell.addEventListener('click', function () {
-        this.classList.remove('mine'); // mine 클래스 제거
-        this.classList.add('mineExplo'); // minExplo 클래스 추가(지뢰터짐 이미지)
+      this.classList.remove('mine'); // mine 클래스 제거
+      this.classList.add('mineExplo'); // minExplo 클래스 추가(지뢰터짐 이미지)
       setTimeout(() => {
-        alert('게임패배! 지뢰를 클릭하셨습니다.');
+        alert('게임패배! 당신은 바보입니다~');
         location.reload(); // 페이지 새로고침
       }, 100)
 
@@ -126,7 +178,7 @@ function gameFinish() {
       if (emptyCells.length === 0) {
         console.log(emptyCells.length)
         setTimeout(() => {
-          alert('게임승리! 게임을 클리어하셨습니다.');
+          alert('게임승리! 당신은 천재시군요!');
           location.reload(); // 페이지 새로고침
         }, 100)
       }
