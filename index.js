@@ -65,7 +65,7 @@ function cellLeftEvent(numRows, numCols) {
 
   cells.forEach(cell => { // 셀 순회
     cell.addEventListener('click', function () {
-      if (this.classList.contains('cellNum') || this.classList.contains('flag')) return; // 숫자칸 클릭 방지
+      if (this.classList.contains('cellNum') || this.classList.contains('flag') || this.classList.contains('mine')) return; // 숫자칸 클릭 방지
 
       let [row, col] = this.textContent.split('.').map(Number); // cell의 좌표 숫자로 변환
       let mineCount = 0; // 주변 지뢰 수 초기값
