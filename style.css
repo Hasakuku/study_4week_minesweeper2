@@ -1,55 +1,86 @@
-#startBtn {
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 10px;
+}
+
+.gameSetting {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mineImgNum {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+/* 메뉴버튼 */
+.button {
   display: inline-block;
 }
 .gameSetting {
   margin-bottom: 10px;
 }
-
-.flag{
-  background-image: url(./flag.png);
-  background-size: cover;
+.gameSetting input {
+  width: 84px;
 }
 
-.mineImg {
+/* 게임보드 */
+#area {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  background-color: #f0f0f036;
 }
-
+.cell {
+  background-color: rgb(233, 229, 23);
+}
 td {
   width: 40px;
   height: 40px;
-  /* font-size: 0; */
+  font-size: 0;
 }
 td.empty {
   cursor: pointer;
   color: #1eb1f5;
-  /* font-size: 0; */
+
   cursor: pointer;
 }
 td.mine {
   cursor: pointer;
   color: rgb(255, 136, 0);
-  /* color: #f0f0f0; */
-  /* font-size: 0; */
+
   cursor: pointer;
-  /* background-image: url("./mineRed.png"); */
   background-size: cover;
 }
-.clear{
-  background-color: rgba(1, 15, 20, 0.459);
+.clear {
+  font-size: 0;
+}
+
+/*이미지*/
+.flag {
+  background-image: url(./flag.png);
+  background-size: cover;
+}
+.mineImg {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+.mineOpen {
+  background-image: url("./mineimg.png");
+  background-size: cover;
 }
 .mineExplo {
-   background-image: url("./mineExplo.png");
-   background-size: cover;
+  background-image: url("./mineExplo.png");
+  background-size: cover;
 }
-.cellNum{
-  background-color: rgba(1, 15, 20, 0.459);
-  color: #e4eaec;
+.cellNum {
+  color: #04aa5d;
   text-align: center;
-  font-size: 1rem;
-}
-#area {
-  display: inline-block;
-  background-color: #f0f0f036;
+  font-size: 1.5rem;
 }
